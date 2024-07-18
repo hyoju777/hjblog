@@ -1,4 +1,4 @@
-packaage com.ohgiraffers.post_st.service;
+package com.ohgiraffers.post_st.service;
 
 
 import com.ohgiraffers.post_st.model.dto.HjBlogDTO;
@@ -90,9 +90,4 @@ pulic class HjService{
     public void deletelog(Long id) {
         hjRepository.deletById(id);
     }
-
-
-
-}
-
 
