@@ -39,7 +39,7 @@ public class HjController {
     @GetMapping("main")
     public String mainpage() {
         // /hj/main 페이지를 차자 값을 반환
-        return "/jun/main"; // (1) /hj안붙여서 오류 경로 정확히 쓰기
+        return "/hj/main"; // (1) /hj안붙여서 오류 경로 정확히 쓰기
     }
     // /main요청을 날리면 /hj/main을 반환해줌
 
