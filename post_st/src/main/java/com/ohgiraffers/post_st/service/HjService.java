@@ -10,27 +10,27 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.optional;
+import java.util.Optional;
 
 @Service
-pulic class HjService{
+public class HjService {
 
     // HjRepository 인터페이스 구현한 빈을 주입받음
-    private final HjRepostory ;
+    private final HjRepository hjRepository;
+
     @Autowired
     public HjService(HjRepository hjRepository) {
         this.hjRepository = hjRepository;
     }
 
 
-
     // 메서드가 하나의 트랜잭션으로 실행되어야 함을 나타냄.메서드 실행 중 발생할 수 있는 데이터베이스 관련 예외를 처리하고 롤백할 수 있다.
     @Transactional
-    public it post(HjBlogDTO hjblogDTO) {
+    public int post(HjBlogDTO hjblogDTO) {
         //블로그 제목이 중복되는지 검사하기 위해 모든 블로그를 가져옵니다.
         //HjBlog 객체들로 구성된 리스트를 저장 hjBlogs는 이 리스트를 가리키는 변수
-        //hjRepository는 HjBlogRepository 타입의 인스턴스.JPARepository<HjBlog,Integer>를 상속받음
-        List<HjBlog> hjBlogs = junRepository.findAll();
+        //hjRepository는 HjBlogRepository 타입의 인스턴스.JpaRepository<HjBlog,Integer>를 상속받음
+        List<HjBlog> hjBlogs = hjRepository.findAll();
 
         // 도메인 로직: 블로그 제목이 이미 존재하는지 확인합니다.
         for (HjBlog blog : hjBlogs) {
@@ -76,7 +76,7 @@ pulic class HjService{
 
     public HjBlog updatePost(HjBlogDTO hjBlogDTO) {
         HjBlog hjBlog = hjRepository.findById(hjBlogDTO.getId())
-                .orElseThrrow(() -> new IllegalArgumentException("Invalid post Id:" + hjBlogDTO.getId()));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + hjBlogDTO.getId()));
         hjBlog.setBlogTitle(hjBlogDTO.getBlogTitle());
         hjBlog.setBlogContent(hjBlogDTO.getBlogContent());
         return hjRepository.save(hjBlog);
@@ -87,7 +87,10 @@ pulic class HjService{
     // 게시물 삭제
 
     @Transactional
-    public void deletelog(Long id) {
-        hjRepository.deletById(id);
+    public void deleteBlog(Long id) {
+        hjRepository.deleteById(id);
     }
 
+
+
+}
