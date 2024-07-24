@@ -144,9 +144,11 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
     @PostMapping("/update")// 이 어노테이션은 HTTP POST 요청을 처리하는 메서드를 정의한다./update경로로 들어오는 POST요청을 이 메서드가 처리한다.
     public String updatePost(@ModelAttribute("hjBlogDTO") HjBlogDTO hjBlogDTO) {// 클라이언트로 부터 전달된 게시물 데이터르 HjBlogDTO객체에 매피하고 이 객체를 사용하여 게시물 정보를 업데이한 후 게시물 목록 페이지로 리다이렉트하는 역할읗 한다. @ModelAttribute는 클라이언트 요청의 데이터를 모델 객체로 변환하여 컨트롤러 메서드의 인자로 전달해 준다.
         //접근제어자 메서드 반환타입 메서드 이름(클라이언트 요청 데이터를 HjBlogDTO객체로 변환하여 전달 HJlogDT는 데이터 전송 객체의 타입 hjBlogDTO는 HjBlogDTO객체를 담는 매개변수 이름
-        HjBlog updatedPost = hjService.updatePost(hjBlogDTO);
+        HjBlog updatedPost = hjService.updatePost(hjBlogDTO);// HjBlog 객체를 담는 변수 updatePost를 선언하고,hjService 객체의 updatePost 메서드를 호출하여 반환된 값을 할당
         // 수정 성공 시, 수정된 게시물 상세 페이지로 리다이렉트
-        return "redirect:/hj/post-detail/" + updatedPost.getId();
+        return "redirect:/hj/post-detail/" + updatedPost.getId();//updatePost 메서드가 성공적으로 실행된 후, 업데이트된 게시글의 상세 페이지로 리다이렉트하는 URL을 반환합니다. "redirect:/hj/post-detail/" 문자열과 updatedPost.getId() 메서드로 가져온 게시글의 ID를 결합하여 최종 리다이렉트 경로를 생성합니다.
+        // "redirect:/hj/post-detail/": 리다이렉션 경로를 지정하는 문자열
+// +: 문자열을 연결하는 연산자,// updatedPost: 업데이트된 게시글 객체, 이전에 정의된 HjBlog 객체,// .getId(): updatedPost 객체의 ID를 가져오는 메서드 호출
     }
 
     // 게시글 삭제
@@ -155,10 +157,10 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
     // 2. 삭제 버튼을 누르면 해당 id의 게시물의 데이터가 데이터베이스에서 삭제되고
     // 3. 게시물 목록에서도 없어져야됨
 
-    @PostMapping("/delete/{id}")
-    public String deleteBlog(@PathVariable Long id) {
-        hjService.deleteBlog(id);
-        return "redirect:/hj/post-list";
+    @PostMapping("/delete/{id}")// 클라이언트가 HTTP POST 요청을 처리하는메서드 지정한다. "/delete/{id}"경로로 보내면 이 메서드가 호출된다.//{id}는 URL 경로에서 동적으로 값을 받아오는 변수이다. 이 메서드는 id 값을 이용해 특정 리소스를 삭제하고 삭제후 클라이언트를 hj/post-list로 리다이렉트하다.
+    public String deleteBlog(@PathVariable Long id) {// HTTP DELETE 요청을 처리하는 메서드,@pathVariable 어노테이션은 URL경로에 포함된 변수 값을 메서드의 매개변수로 전달한다.이 변수는 게시물의 고유 ID를 나타낸다.
+        hjService.deleteBlog(id); //hjService 객체를 사용하여 데이터베이스에서 지정된 ID의 블로그 게시글을 삭제한다.//hjService는 비즈니스 로직을 처리하는 서비스 클래스이다.
+        return "redirect:/hj/post-list"; // 블로그 게시글 삭제가 완료된 후, 사용자를 블로그 게시글 목록 페이지로 리다이렉트한다. // redirect:/hj/post-list는 브라우저에게 새로운 URL로 이동하라는 명령을 보낸다.
     }
 
 
