@@ -166,9 +166,73 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
 
 }
 
+// Spring Framework를 사용하여 블로그 게시물을 관리하는 웹 애플리케이션의 컨트롤러 클래스 HjContorller 구현 //컨트롤러:HTTP요청을 처리하고 필요한 비즈니스 로직을 호출하며 결과를 뷰에 전달 역할
+//1. 클래스 선언 및 필드 정의
+//패키지 선언 및 임포트: 필요한 클래스와 어노테이션을 임포트한다.
+//package com.ohgiraffers.post_st.controller;
+//import com.ohgiraffers.post_st.model.dto.HjBlogDTO;// HjBlogDTO(클라이언트와 서버 간에 데이터를 전달할 때 사용된다.)
+//import com.ohgiraffers.post_st.model.entity.HjBlog;// HjBlog (데이터베이스의 테이블과 매핑되며,데이터베이스 작업 시 사용된다.)
+//import com.ohgiraffers.post_st.service.HjService; // HjService(서비스 계층 클래스이다. 비즈니스 로직을 포함하고 있고 컨트롤러에서 이 클래스를 호출하여 비즈니스 작업을 수행한다.)
+//import org.springframework.beans.factory.annotation.Autowired;//(Autowired의존성 주입을 위한 어노테션이다. Spring이 자동으로 필요한 의존성을 주입할 수 있게 해준다.)
+//import org.springframework.stereotype.Controller;//이 클래스가 Spring MVC의 컨트롤러 역할을 한다는 것을 정의.HTTP요청을 처리하고 뷰를 반환
+//import org.springfreamework.ui.Model; //Spring MVC에서 모델을 다루기 위한 인터페이스이다.컨트롤러에서 뷰에 데이터를 전달 할 때 사용된다.
+//import org.springframewok.web.servlet.ModelAndView;//모델과 뷰를 함께 반환하는 클래스. 컨트롤러에서 결과를 처리할 때 모델과 뷰를 함꼐 설정한다.@RequestMapping,@GetMapping,@PostMapping:URL경로와 HTTP메서드(GET,POST 등)에 따라 메서드를 매핑하는 어노테이션이다. 요청 처리 메서드를 정의할 때 사용 된다.
+//import java.util.List;// java collections framework의 리스트 인터페이스이다. 여러개의 객체를 순서대로 저장하고 관리할 수 있는 컬렉션이다. 컨트롤러에서 여러개의 블로그 게시글을 저장하고 전달할 때 사용된다.
 
+//@contrller: 이 클래스가 Spring MVC의 컨트롤러임을 나타낸다.
+//@RequestMapping("/hj"): 이 클래스 내의 모든 메소드가 /hj로 시작하는 URL에 매핑 된다.
+//필드 hjService와 생성자 주입 HjService객체를 주입받아 초기화한다.
 
+//2. 메소드 정의
+//2-1 메인페이지
+//@GetMappin("main"):'/hj/main'URL에 매핑
+//@GetMapping("main")
+//메소드'mainpage'메인 페이지 뷰를 반환한다.
+//public String mainpage(){
+//return"/hj/main";
+}
+//2-2 게시물  작성 폼
+//@GetMapping("/post"):게시물 작성 폼을 보여준다.
+//@GetMapping("/post")
+//메소드 showPostForm 작성 폼 뷰를 반환함
+//public String showPostForm(){
+//return"/hj/post";
+//2-3 게시물 등록
+//PostMapping POST요청을 처리한다.
+//@PostMapping
+//메소드 postBlog 게시물을 등록하고 결과에 따라 뷰를 설정
+//1.메서드가 시작된다. HjBlogDTO 객체의 ModelAndView 객체를 파라미터로 받는다.
 
+//접근제어자(모두접근가능)/반환타입(ModelAndView객체반환)/메서드이름(블로그게시물처리하는 역할)/매개변수타입(HjBlogDTO 객체를 메서드전달)/전달된 HjBlogDTO 객체(블로그게시물데이터포함)/두번째 매개변수의 타입(ModelAndView 객체를 메서들에전달)/전달된 ModelAhdView객체(뷰이름과 모델 데이터를 포함)
+//public ModelAndView postBlog(HjBlogDTO hjBlogDTO,ModelAndiew mv){
+//2.블로그 내용이 null이거나 블로그 제목이 빈 문자열인지 확인한다.
+//조건문(뒤따르는 조건이 참(true)일 때 블록 내의 코드가 실행/블로그데이터를 담고있는 데이터 전송객체/hjBlogDTO객체의 메서드(블로그콘텐츠반환)/블고그 콘텐츠가 null인지 검사(null은 값이 없다는 것)/논리연산자로 두 조건중 하나라도 참이면 전체조건이 참으로 평가/hjBlogDTO객체의 메서드로 블로그 제목을 반환/반환된 블로그 제목이 빈 문자열("")인지 검사
 
+//if(hjBlogDTO.getBlogContent() == null || hjBlogDTO.getBlogTitle().equals("")){
+//3.조건이 참이라면,"redirect:/hj/post"로 리다이레트하도록 뷰 이름을 설정한다.
+//ModelAndView 객체를 참조(이 객체는 모델 데이터와 뷰이름을 함께 설정하고 반환하는 데사용)
+
+//4.조건이 거짓이라면 블로그 내용을 데이터베이스에 저장하려고 시도한다.
+//5.HjService 객체의 post메서드를 호출하여 블로그 내용을 저장하고 그 결과를 result에 저장한다.
+//6.저장 결과가 0이하라면(즉 저장이 실패했다면)
+//7.에러페이지를 표시하도록 뷰 이름을 "error/page로 설정
+//8.저장 결과가 양수라면 (즉 저장이 성공했다면)
+//9.블로그 포스트 페이지를 표시하도록 뷰 이름을 "hj/post"로 설정
+//10.ModelAndView 객체를 반환한다. 이 객체는 설정된 뷰 이름과 모델 데이터를 포함한다.
+//2-4 게시물 목록
+//@GetMapping("/post-list")':게시물 목록을 가져와 뷰에 전달한다.
+
+// 메소드 'getBlogList': 목록 뷰를 반환한다.
+//2-5 게시물 상세 조회
+//GetMapping("/post-detail/{blogid}"): 특정 게시물의 상세 정보를 조회,메소드 getBlogDetail상세 조회 뷰를 반환
+//2-6 게시물 수정 폼
+//@GetMapping("/post-edit"): 수정 폼을 보여준다.
+//메소드 'showUpdateForm': 수정 폼 뷰를 반환한다.
+//2-7 게시물 업데이트
+//@PostMapping("/update"):POST요청을 처리한다.
+//메소드 updatePost 게시물을 업데이트하고 상세 조회 페이지로 리다이렉트한다.
+//2-8 게시물 삭제
+//@PostMapping("/delete/{id}")': 게시물을 삭제한다.
+//메소드 deleteBlog 삭제 후 목록 페이지로 리다이렉트한다.
 
 

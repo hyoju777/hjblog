@@ -2,7 +2,10 @@ package com.ohgiraffers.post_st.model.dto;
 
 
 //HjBlogDTO 클래스는 블로그 게시물의 데이터 전송 객체를 나타냄
-public class HjBlogDTO {
+public class
+
+
+HjBlogDTO {
 
     private Long id;//private는 접근 제어자를 나타내며, 이는 해당 변수가 클래스 내부에서만 접근 가능하다는 것을 의미합니다. 즉,
     // 외부 클래스에서는 이 변수에 접근할 수 없습니다.
