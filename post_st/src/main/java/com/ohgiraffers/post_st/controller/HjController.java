@@ -1,13 +1,11 @@
-package com.ohgiraffers.post_st.controller; // 패키지 선언: com...controller패키지에 속한 클래스임을 나타냄
+package com.ohgiraffers.post_st.controller; // 패키지
 
 
-
+// 선언: com...controller패키지에 속한 클래스임을 나타냄
 import com.ohgiraffers.post_st.model.dto.HjBlogDTO;// HjBlogDTO 클래스 임포트: 데이터 전송 객체
 import com.ohgiraffers.post_st.model.entity.HjBlog; // HjBlog 클래스 임포트: 엔티티 클래스
 import com.ohgiraffers.post_st.service.HjService; // HjService 클래스 임포트: 서비스 레이어
-import org.springframework.beans.factory.annotation.Autowired; // @Autowired어노테이션 임포트: 스프링의 의존성 주입
-
-
+import org.springframework.beans.factory.annotation.Autowired; //@Autowired어노테이션 임포트: 스프링의 의존성 주입
 import org.springframework.stereotype.Controller; // @Controller 어노테이션 임포트: 스프링 MVC 컨틀롤러
 import org.springframework.ui.Model; // Model 인터페이스 임포트: 뷰에 데이터 전달
 import org.springframework.web.bind.annotation.*; // 스프링 웹 애노테이션 임포트: 요청 매핑,경로변수, 요청 매개변수 등을 처리
@@ -33,7 +31,7 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
     // 생성자 주입 방식으로 'HjService'타입의 객체를 주입받음. 스프링 컨테이너가 'HjController'객체를 생성할 때, 'HjService'타입의 빈을 찾아 생성자의 매개변수로 주입
     public HjController(HjService hjService) {
         // 주입된 HjService 인스턴스를 클래스 필드에 할당하여 초기화함
-        this.hjService = hjService;// 생정자에게 주입 받은 HjService 객체를 클래스의 hjService 필드에 할당
+        this.hjService = hjService;// 생정자에게 주입 받은 HjServ.getice 객체를 클래스의 hjService 필드에 할당
     }
 
     //GET 요청을 처리하도록 매핑./main을 요청하면 이 메소드가 호출됨
@@ -181,7 +179,8 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
 
 //@contrller: 이 클래스가 Spring MVC의 컨트롤러임을 나타낸다.
 //@RequestMapping("/hj"): 이 클래스 내의 모든 메소드가 /hj로 시작하는 URL에 매핑 된다.
-//필드 hjService와 생성자 주입 HjService객체를 주입받아 초기화한다.
+//필드 hjService와 생성자 주입 HjService객체를 주)
+// 입받아 초기화한다.
 
 //2. 메소드 정의
 //2-1 메인페이지
@@ -210,15 +209,27 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
 
 //if(hjBlogDTO.getBlogContent() == null || hjBlogDTO.getBlogTitle().equals("")){
 //3.조건이 참이라면,"redirect:/hj/post"로 리다이레트하도록 뷰 이름을 설정한다.
-//ModelAndView 객체를 참조(이 객체는 모델 데이터와 뷰이름을 함께 설정하고 반환하는 데사용)
-
+//ModelAndView 객체를 참조(이 객체는 모델 데이터와 뷰이름을 함께 설정하고 반환하는 데사용)/ModelAndView클래스의 메서드로 뷰의 이름을 설정.모델과 뷰를 설정한후 뷰의 이름을 지정할 때 사용/Spring MVC에서 사용되는 접두사로 클라이언트를 다른 URL로 리다이렉트하라는 지시를 나타냄 .서버가 클라이언트에게 새로운 uRl로 이동하라고 지시하는 방식/클라이언트가 리다이렉트 될 URL경로이다.
+//mv.setViewName("redirect:/hj/post");
 //4.조건이 거짓이라면 블로그 내용을 데이터베이스에 저장하려고 시도한다.
+        //}else{
 //5.HjService 객체의 post메서드를 호출하여 블로그 내용을 저장하고 그 결과를 result에 저장한다.
+//int result=hjService.post(hjBlogDTO);
+// 정수형 변수선언/메서드 호출의 결과를 저장할 변수/대입연산자/메서드를 호출할 객체 또는 클래스 인스턴스/객체의 메서드 호출을 나타낸다./post메서드에 전달하는 인자이다./
+//int result = hjService.post(hjBlogDTO);
 //6.저장 결과가 0이하라면(즉 저장이 실패했다면)
+//if(result<=0){ //조건이 참일 때 실행되는 코드 블록
 //7.에러페이지를 표시하도록 뷰 이름을 "error/page로 설정
+//mv.setViewName("error/page");
 //8.저장 결과가 양수라면 (즉 저장이 성공했다면)
+//}else{
 //9.블로그 포스트 페이지를 표시하도록 뷰 이름을 "hj/post"로 설정
+//mv.setViewName("hj/post");
+        //}
+//}
 //10.ModelAndView 객체를 반환한다. 이 객체는 설정된 뷰 이름과 모델 데이터를 포함한다.
+//return mv;
+//}
 //2-4 게시물 목록
 //@GetMapping("/post-list")':게시물 목록을 가져와 뷰에 전달한다.
 
@@ -227,7 +238,7 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
 //GetMapping("/post-detail/{blogid}"): 특정 게시물의 상세 정보를 조회,메소드 getBlogDetail상세 조회 뷰를 반환
 //2-6 게시물 수정 폼
 //@GetMapping("/post-edit"): 수정 폼을 보여준다.
-//메소드 'showUpdateForm': 수정 폼 뷰를 반환한다.
+//메소드 'showUpdateForm': 수정 폼뷰를 반환한다.
 //2-7 게시물 업데이트
 //@PostMapping("/update"):POST요청을 처리한다.
 //메소드 updatePost 게시물을 업데이트하고 상세 조회 페이지로 리다이렉트한다.
@@ -236,3 +247,242 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
 //메소드 deleteBlog 삭제 후 목록 페이지로 리다이렉트한다.
 
 
+
+//1.컨트롤러 클래스 정의 및 의존성 주입
+//2.메인페이지 매핑
+//3.게시물 작성 폼 페이지 매핑
+//4.블로그 게시물 제출 처리
+//5.블로그 목록 페이지 매핑
+//6.블로그 상세 페이징 매핑
+//7.블로그 수정 폼 페이지 매핑
+//8.블로그 게시물 수정 처리
+//9.블로그 게시물 삭제 처리
+
+
+//0.패키지 선언부
+//package com.ohgiraffers.post_st.controller;
+
+//0.필요한 클래스 및 인터페이스를 임포트
+//import com.ohgiraffers.post_st.model.dto.HjBlogDTO;
+//import com.ohgiraffers.post_st.model.entity.HjBlog;
+//import com.ohgiraffers.post_st.service.HjService;
+
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springFramework.web.ind.annotation.*;
+//import org.springframework.web.servlet.ModelNadView;
+//import java.util.List;
+
+//0.Spring의 Controller어노테이션을 사용하여 컨트롤러 클래스임을 선언
+//@Controller
+
+//0.기본 URL매핑 설정
+//RequestMapping("/hj")
+//publicr class HjController{
+
+//0.서비스 계층 의존성 선언
+//private final HjService hjService;
+
+//0.생성자를 통한 서비스 계층 의존성 주입
+//@Autowired
+//public HjController(HjService hjService){
+//this.hjService = hjService;}
+
+//0.메인 페이지 매핑
+//@GetMapping("main")
+//public String mainPage(){
+
+//0.메인 페이지 뷰 반환
+//return"/hj/main";}
+
+//0.게시물 작성 폼 페이지 매핑
+//@GetMapping("/post")
+//public Sting showPostForm(){
+
+//0.게시물 작성 페이지 뷰 반환
+//return"/hj/post";}
+
+//0.블로그 게시물 제출 처리
+//@postMapping("/post")
+
+//0.@ModelAttribute를 사용하여 폼 데이터를 DTO객체로 바인딩
+//public ModelAndView postBlog(@ModelAttriute HjBlogDTO hjBllogDTO,ModelAndView mv){
+
+//0.블로그 제목 유효성 검사 및 리다이렉트
+//if(hjBlogDTO.getBlogTitle() == null ||
+//hjBlogDTO.getBlogTitle().equals("")){
+//mv.setViewName("redirect:/hj/post");
+//reurn mv;
+        //}
+//0.블로그 내용 유효성 검사 및 리다이렉트
+//if(hjBlogDTO.getBlogContent() == null ||
+//hjBlogDTO.getBlogContent().equals("")){
+//mv.setViewName("redirect:/hj/post");
+//return mv;
+//}
+
+//0.서비스 계층 호출하여 블로그 게시물 저장
+//int result = hjService.post(hjBlogDTO);
+
+//0.결과에 따른 뷰 설정(에러 페이지 또는 게시물 페이지)
+//if(result < = 0) {
+    //mv.setViewName("error/page");
+        //else{
+//mv.setViewName("hj/post");
+//}
+//return mv;
+//}
+// 블로그 게시물 제출 처리
+//블로그 목록 페이지 매핑
+//블로그 상세 페이지 매핑
+//블로그 수정 폼 페이지 매핑
+//블로그 게시물 수정을 처리
+//블로그 게시물 삭제를 처리
+
+
+//1.이 클래스는 Spring의 컨트롤러임을 나타냄
+//1.기본 URL매핑을 설정("/hj"로 시작하는 모든 요청을 이 컨트롤러가 처리함
+//1.서비스 계층 의존성 설정
+//1.생성자를 통한 서비스 주입(Autowired 어노테이션을 통해 자동 주입)
+
+//2. 메인 페이지를 매핑("/hj/main"URL에 대해 showPostForm()메서드를 실행)
+//2.메인페이지 뷰를 반환
+
+//3.게시물 작성 폼 페이지를 매핑("/hj/post"URL에 대해 showPostFom()메서드를 실행)
+//3.게시물 작성 페이지 뷰를 반환
+
+//4.블로그 게시물 제출을 처리("/hj/post"URLdp 대해 postBlog()메서드를 실행)
+//4.@ModelAttribute를 사용하여 폼데이터를 HJBlogDTO객체로 바인딩
+//4.블로그 제목 유효성 검사
+//4.제목이 없으면 작성 폼으로 리다이렉트
+//4.블로그 내용 유효성 검사
+//4.내용이 없으면 작성 폼으로 리다이렉트
+//4.서비스 계층을 호출하여 블로그 게시물 저장
+//4.결과에 따라 뷰를 설정
+//4.실패 시 에러 페이지
+//4.성공 시 게시물 페이지list" URL에 대해 getBlogList()메서드를 실행)
+
+////5.서비스 계층에서 모든 블로그 게시물 조회
+//5.블로그 목록 페이지 매핑("/hj/post-
+//5.조회된 블로그 목록을 모델에 추가
+//5.블로그 몰록 페이지 뷰를 반환
+
+//6.블로그 상세 페이지를 매핑("/hj/post-detail/{blogid}" URL에 대해 getBloDetail()메서드를 실행)
+//6.경로 변수로 전달된 blogid를 사용하여 블로그 게시물 조회
+//6.조회된 블로그를 모델에 추가
+//6.블로그 상세 페이지 뷰를 반환
+
+//7.블로그 수정 폼 페이지를 매핑("/hj/post-edit"URL에 대해 showUPdatdForm()메서드를 실행)
+//7.요청 매개변수로 전달된 id를 사용하여 블로그 게시물 조회
+//7.블로그 정보를 DTO로 변환하여 모델에 추가
+//7.블로그 수정 페이지 뷰를 반환
+
+//8.블로그 게시물 수정을 처리("/hj/updatd"URL에 대해 updatePost()메서드를 실행)
+//8.@ModelAttribute를 사용하여 수정된 폼 데이터를 HjBlogDTO객체로 바인딩
+//8.서비스 계층을 호추라여 블로그 게시물 수정
+//8.수정된 게시물의 상세 페이지로 리다이렉트
+
+//9.블로그 게시물 삭제를 처리("hj/delete/{id}"URL에 대해 deleteBlog()메서드를 실행)
+//9.경로 변수로 전달된 id를 사용하여 블로그 게시물 삭제
+//9.블로그 목록 페이지로 리다이렉트
+
+/////// 패키지 선언부
+//package com.ohgiraffers.post_st.controller;
+//// 필요한 클래스 및 인터페이스를 임포트
+//import com.ohgiraffers.post_st.model.dto.HjBlogDTO;
+//import com.ohgiraffers.post_st.model.entity.HjBlog;
+//import com.ohgiraffers.post_st.service.HjService;
+
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframewok.web.bind.annotaion.*;
+//import org.springframework.wev.servlet.ModerAndView;
+
+//import java.util.List;
+//// Spring의 Controller 어노테이션을 사용하여 컨트롤러 클래스임을 선언
+//@Controller
+//// 기본 URL 매핑 설정
+//@RequestMaooing("/hj")
+//public class HjController{
+//// 서비스 계층 의존성 선언
+//private final HjService hjService;
+//// 생성자를 통한 서비스 계층 의존성 주입
+//@Autowired
+//public HjController(HjService hjService){
+//this.hjService= hjservice;}
+//// 메인 페이지 매핑
+//@GetMapping("main")
+//public String mainpage(){
+//// 메인 페이지 뷰 반환
+//return"/hj/main";
+//// 게시물 작성 폼 페이지 매핑
+//@GetMapping("/post")
+//public String showPostForm(){
+//// 게시물 작성 페이지 뷰 반환
+//return "/hj/post";
+//}
+//// 블로그 게시물 제출 처리
+//@PostMapping("/post")
+//// @ModelAttribute를 사용하여 폼 데이터를 DTO 객체로 바인딩
+//public ModelAndView postBlog(HjBlogDTO,ModelAndBiew mv){
+//// 블로그 제목 유효성 검사 및 리다이렉트
+//if(hjBlogDTO.getBlogContent() = = null ||
+//hjBlogDTO.getBlogTitle().equals(""){
+//mv.setViewName("redirect:hj/post");
+///}
+//// 블로그 내용 유효성 검사 및 리다이렉트
+//if(hjBlogDTO.getBlogContent() == null ||
+//hjBlogDTO.getBlogTitle().equls(""){
+//mv.setViewName("redirect:/hj/post");
+//}
+
+//// 서비스 계층 호출하여 블로그 게시물 저장
+//int result = hjService.post(hjBlogDTO);
+//// 결과에 따른 뷰 설정 (에러 페이지 또는 게시물 페이지)
+//if(result <= 0){
+//mv.setViewName("error/page");
+//}eale{
+//mv.setViewName("hj/post");
+//return mv;
+//// 블로그 목록 페이지 매핑
+//@GetMapping("/post-list")
+//public String getBlogList(Model model){
+//// 서비스 계층에서 모든 블로그 게시물 조회
+//List<HjBlog>logList = hjService.getAllBlogs();
+//// 조회된 블로그 목록을 모델에 추가
+//model.addAttrivute("blogList",blogList);
+//return "/hj/post-list";
+       // }
+//// 블로그 목록 페이지 뷰 반환
+//
+//// 블로그 상세 페이지 매핑
+//
+//// 경로 변수로 전달된 blogid를 사용하여 블로그 게시물 조회
+//
+//// 조회된 블로그를 모델에 추가
+//
+//// 블로그 상세 페이지 뷰를 반환
+//
+//// 블로그 수정 폼 페이지 매핑
+//
+//// 요청 매개변수로 전달된 id를 사용하여 블로그 게시물 조회
+//
+//// 블로그 정보를 DTO로 변환하여 모델에 추가
+//
+//// 블로그 수정 페이지 뷰 반환
+//
+//// 블로그 게시물 수정을 처리
+//
+//// @ModelAttribute를 사용하여 수정된 폼 데이터를 DTO 객체로 바인딩
+//
+//// 서비스 계층을 호출하여 블로그 게시물 수정
+//
+//// 수정된 게시물의 상세 페이지로 리다이렉트
+//
+//// 블로그 게시물 삭제를 처리
+//
+//// 경로 변수로 전달된 id를 사용하여 블로그 게시물 삭제
+//
+//// 블로그 목록 페이지로 리다이렉트
