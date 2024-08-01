@@ -456,33 +456,47 @@ public class HjController {// Hjcontroller클래스를 정의한다. 이 클래�
 //return "/hj/post-list";
        // }
 //// 블로그 목록 페이지 뷰 반환
-//
+//return"/hj/post-list";
+//}
 //// 블로그 상세 페이지 매핑
-//
+//@GetMapping("post-detail/{blogid}"
+//public String getBlogDrtail(@PathVariable Long blogid,Model model){
 //// 경로 변수로 전달된 blogid를 사용하여 블로그 게시물 조회
-//
+//HjBlog blog = hjService.getlogById(blogid);
 //// 조회된 블로그를 모델에 추가
-//
+//model.addAttribute("blog",blog);
 //// 블로그 상세 페이지 뷰를 반환
-//
+//return "/hj/post-detail";
+        //}
 //// 블로그 수정 폼 페이지 매핑
-//
+//@GetMapping("/post-edit")
+//public String showUpdateForm(@RequestParm("id") Long id, Model model) { //
 //// 요청 매개변수로 전달된 id를 사용하여 블로그 게시물 조회
-//
+//HjBlog blog = hjService.getBlogById(id);
 //// 블로그 정보를 DTO로 변환하여 모델에 추가
-//
+//HjBlogDTO blogDTO = new HjBlogDTO();
+//blogDTO.setId(blog.getId());
+//blogDTO.setBlogTitle(blog.getBlogTitle());
+//blogDTO.setContent(blog.getBlogContent());
+//model.addAttriute("hjBlogDTO",blogDTO);
 //// 블로그 수정 페이지 뷰 반환
-//
+//return "/hj/post-edit";
+//}
 //// 블로그 게시물 수정을 처리
-//
+//@postMapping("/update")
 //// @ModelAttribute를 사용하여 수정된 폼 데이터를 DTO 객체로 바인딩
-//
+//public String updatePost(@ModelAttribute("hjBlogDTO") HjBlogDTO hjBlogDTO) {
 //// 서비스 계층을 호출하여 블로그 게시물 수정
-//
+//HjBlog updatePost = hjService.updatePost(hjBlogDTO);
 //// 수정된 게시물의 상세 페이지로 리다이렉트
-//
+//return "redirect:/hj/post-detail/" + updatePost.getId();
+//}
 //// 블로그 게시물 삭제를 처리
-//
+//@PostMapping("/delete/{id}")
+//public String deleteBlog(@PathVariable Long id){
 //// 경로 변수로 전달된 id를 사용하여 블로그 게시물 삭제
-//
+//hjService.deleteBlog(id);
 //// 블로그 목록 페이지로 리다이렉트
+//return "redirect:/hj/post-list";// 오타 수정
+//}
+//}

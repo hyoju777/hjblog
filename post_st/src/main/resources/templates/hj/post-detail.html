@@ -20,3 +20,49 @@
 </div>
 </body>
 </html>
+
+<!--0.문서타입선언-->
+<!--<!DOCTYPE html>-->
+<!--HTML 문서의 시작 태그--Thymeleaf 네임스페이스를 선언하여 Thymeleaf템플릿 기능을 사용할 수 있게 함-->
+<!--<html xmlns:th="http://www.thymeleaf.org">
+<!<head-->
+
+<!--1.문서의 문자 인코딩을 설정-->
+<!--meta charset="UTF-8">-->
+<!--<title>Blog Detail</title>-->
+
+<!--2.Bootstrap CSS를 불러오기-->
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+</body>-->
+<!--div 요소를 생성하여 분서의 특정 구역을 나눈다. 이 div요소는 container클래스를 가지며 중아에 정렬되고 고정된 너비를 가진다.
+'my-5클래스를 사용하여 요소의 위쪽과 아래쪽에 적절한 크기의 여백이 추가된다.-->
+<!--<div class="container my-5">-->
+
+<!--3.블로그 제목을 중앙 정렬하고, 간격을 추가-->
+<!--<h1 class="text-center mb-4" th:text="${blog.blogTitle}">Blog Title</h1>-->
+<!-- 가장 중요한 제목, 중앙 정렬,아래쪽 여백, Thymeleaf로 동적 텍스트 삽입 -->
+<!--<div class="card">-->
+<!-- 카드 스타일의 컨테이너 -->
+<!--<div class= "card-body">-->
+<!-- 카드 본문 내용 영역 -->
+<!--4.블로그 내용을 표시 -->
+<!--p class="card-text" th:text="${blog.blogContent}"></p>-->
+<!--5.작성 날짜를 표시 -->
+<!--<p class="card-text">-->
+<!--<small class="text-muted" th:text="${#dates.format(blog.createDate, 'yyyy-MM-dd HH:mm:ss')}"></small>-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--6.목록으로 돌아가는 버튼-->
+<!--button type="button" class="btn btn-primary mt-3" onclick="location.href='/hj/post-list'">목록으로</button>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+
