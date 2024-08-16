@@ -19,5 +19,6 @@ public class BlogPostService {
 
     public BlogPost getBlogPostById(Long id) {
         return blogPostRepository.findById(id).orElse(null);
+
     }
 }

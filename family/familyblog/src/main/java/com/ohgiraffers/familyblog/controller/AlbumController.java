@@ -25,3 +25,5 @@ public class AlbumController {
         return "album/albumDetail";
     }
 }
+
+// AlbumController는 앨범 페이지와 관련된 요청을 처리한다. 앨범 목록 앨범 상세 페이지 등을 담당한다.
